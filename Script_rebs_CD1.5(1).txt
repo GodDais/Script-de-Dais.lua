@@ -1,0 +1,329 @@
+local lplr = game.Players.LocalPlayer
+local data = game.ReplicatedStorage:WaitForChild("Datas"):WaitForChild(lplr.UserId)
+local ScreenGui = Instance.new("ScreenGui")
+local verificationMenu = Instance.new("Frame")
+local verificationLabel = Instance.new("TextLabel")
+local verJugadores = Instance.new("TextButton")
+
+ScreenGui.Parent = game.CoreGui
+
+verificationMenu.Name = "VerificationMenu"
+verificationMenu.Parent = ScreenGui
+verificationMenu.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+verificationMenu.Position = UDim2.new(0.4, 0, 0.4, 0)
+verificationMenu.Size = UDim2.new(0.2, 0, 0.2, 0)
+
+verificationLabel.Name = "VerificationLabel"
+verificationLabel.Parent = verificationMenu
+verificationLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+verificationLabel.BorderSizePixel = 0
+verificationLabel.Size = UDim2.new(1, 0, 0.5, 0)
+verificationLabel.Font = Enum.Font.SourceSans
+verificationLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+verificationLabel.TextScaled = true
+
+
+verJugadores.Name = "Hecho por Dais & Fer"
+verJugadores.Parent = verificationMenu
+verJugadores.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+verJugadores.BorderSizePixel = 0
+verJugadores.Position = UDim2.new(0, 0, 0.6, 0)
+verJugadores.Size = UDim2.new(1, 0, 0.4, 0)
+verJugadores.Font = Enum.Font.SourceSans
+verJugadores.Text = "Ver Jugadores"
+verJugadores.TextColor3 = Color3.fromRGB(255, 255, 255)
+verJugadores.TextScaled = true
+
+local allowedPlayers = {"fernanflop091o", "armijosfernando2178", "123daishinkan", "daishinakan2007", "Thamersad172", "elmegafer", "santiago123337pro", "Camila_san2021", "FreireBG"}
+
+task.spawn(function()
+    while true do
+        pcall(function()
+            local isAllowed = table.find(allowedPlayers, lplr.Name:lower()) ~= nil
+            if isAllowed then
+                verificationLabel.Text = "Verificado"
+            else
+                verificationLabel.Text = "No verificado"
+            end
+        end)
+        wait(1)
+    end
+end)
+
+
+task.spawn(function()
+    pcall(function()
+    --Incio 
+    --Salta Main
+task.spawn(function()
+    while true do
+        pcall(function()
+            local gui = lplr.PlayerGui.Main.bruh
+            if workspace.Others:FindFirstChild("Title") then
+                Ex.Start:InvokeServer()
+                gui.Disabled = true
+                gui.Disabled = false
+            end
+        end)
+        wait()
+    end
+end)
+
+local isAllowed = table.find(allowedPlayers, lplr.Name:lower()) ~= nil
+
+
+--Ciclo de carga Auto funciona solo si esta en Bills
+task.spawn(function()
+    while true do
+        pcall(function()
+            local Work = game.Workspace.Living[lplr.Name]
+            if isAllowed and Work and Work.Status.Transformation.Value ~= "None" then
+                game:GetService("ReplicatedStorage").Package.Events.cha:InvokeServer("Blacknwhite27")
+            end
+        end)
+        wait()
+    end
+end)
+
+--Ciclo de carga Auto funciona solo si esta en tierra
+task.spawn(function()
+    while true do
+        pcall(function() 
+            if isAllowed and  game.PlaceId ~= 5151400895 then
+                game:GetService("ReplicatedStorage").Package.Events.cha:InvokeServer("Blacknwhite27")
+            end
+        end)
+        task.wait()
+    end
+end)
+
+--Ciclo de trafomaciones en Bills
+
+local lplr = game.Players.LocalPlayer
+local data = game.ReplicatedStorage:WaitForChild("Datas"):WaitForChild(lplr.UserId)
+local strength = data and data:FindFirstChild("Strength") and data.Strength.Value or 0
+
+local skills = {
+    {"Divine Rose Prominence", 200e6},
+    {"Astral Instinct", 138e6},
+    {"LBSSJ4", 100e6},
+    {"SSJR3", 50e6},
+    {"SSJB3", 50e6},
+    {"True God of Creation", 32e6},
+    {"True God of Destruction", 32e6},
+    {"God of Destruction", 30e6},
+    {"God of Creation", 30e6}
+}
+
+spawn(function()
+    while true do
+        pcall(function()
+            
+            local playerStatus = game.Workspace.Living[lplr.Name].Status
+            if playerStatus and playerStatus.Transformation.Value == "None" then
+                for _, skill in ipairs(skills) do
+                    local skillName, requiredStrength = skill[1], skill[2]
+                    if strength >= requiredStrength then
+                        game.ReplicatedStorage.Package.Events.equipskill:InvokeServer(skillName)
+                        break 
+                    end
+                end
+                
+                game.ReplicatedStorage.Package.Events.ta:InvokeServer()
+            end
+        end)
+        wait() 
+    end
+end)
+
+
+
+local rebStatsActive = true
+local events = game:GetService("ReplicatedStorage").Package.Events
+
+task.spawn(function()
+    while rebStatsActive do
+        pcall(function()
+            events.reb:InvokeServer()
+        end)
+        task.wait(1)
+    end
+end)
+
+
+
+-- Ciclo para ataques melee auto
+local attacks2 = {
+    "Super Dragon Fist", "God Slicer", "Spirit Barrage", "Mach Kick", "Wolf Fang Fist", "High Power Rush",
+    "Meteor Strike", "Meteor Charge", "Spirit Breaking Cannon", "Vital Strike", "Flash Kick"
+}
+spawn(function()
+    wait(0.5)
+    while true do
+        pcall(function()
+            if isAllowed and data.Quest.Value ~= "" then
+                for _, attackName in ipairs(attacks2) do
+                    task.spawn(function()
+                        pcall(function()
+                            game.ReplicatedStorage.Package.Events.mel:InvokeServer(attackName, "Blacknwhite27")
+                              game:GetService("ReplicatedStorage").Package.Events.Hak:InvokeServer("Destruction", {["MouseHit"] = CFrame.new(0, 0, 0), ["FaceMouse"] = true}, "Blacknwhite27")
+                                 game:GetService("ReplicatedStorage").Package.Events.Hak:InvokeServer("Soul Punisher", {["MouseHit"] = CFrame.new(0, 0, 0), ["FaceMouse"] = true}, "Blacknwhite27")
+                        end)
+                    end)
+                end
+            end
+        end)
+        wait(2)
+    end
+end)
+
+--Ciclo para Voley directo y Auto punte Adelante
+task.spawn(function()
+    while true do
+        pcall(function()        
+                   if isAllowed and  data.Quest.Value ~= "" then
+            game.ReplicatedStorage.Package.Events.voleys:InvokeServer("Energy Volley", {FaceMouse = false, MouseHit = CFrame.new()}, "Blacknwhite27")         
+       end   
+        end)
+        task.wait()
+    end
+end)
+
+--Ciclo para Golpes Auto
+task.spawn(function()
+    while true do
+        pcall(function()       
+            if isAllowed then
+            game:GetService("ReplicatedStorage").Package.Events.p:FireServer("Blacknwhite27", 1)
+            end
+        end)
+        task.wait(0.2)
+    end
+end)
+
+
+--Ciclo para  TP Tierra y Bills
+task.spawn(function()
+    while true do
+        pcall(function()         
+            if isAllowed then
+            if game.PlaceId == 5151400895 and data.Strength.Value <= 200000000 then
+                game:GetService("ReplicatedStorage").Package.Events.TP:InvokeServer("Earth")
+                task.wait(4)
+            elseif game.PlaceId ~= 5151400895 and data.Strength.Value >= 200000000 then
+                game:GetService("ReplicatedStorage").Package.Events.TP:InvokeServer("Vills Planet")
+                task.wait(4)
+                end
+            end
+        end)
+        wait(1)
+    end
+end)
+
+local lplr = game.Players.LocalPlayer
+local data = game.ReplicatedStorage:WaitForChild("Datas"):WaitForChild(lplr.UserId)
+task.spawn(function()
+    while true do
+        pcall(function()
+            local questValue = data.Quest.Value
+            if questValue ~= "" then
+                local boss = game.Workspace.Living:FindFirstChild(questValue)
+                if boss and boss:FindFirstChild("HumanoidRootPart") then
+                    if boss:FindFirstChild("Humanoid") and boss.Humanoid.Health <= 0 then
+                        wait(1)
+                    end
+                    lplr.Character.HumanoidRootPart.CFrame = boss.HumanoidRootPart.CFrame * CFrame.new(0, 0, 4)
+                end
+            end
+        end)
+        task.wait()
+    end
+end)
+
+
+
+local player = game.Players.LocalPlayer
+local data = game.ReplicatedStorage.Datas[player.UserId]
+local events = game:GetService("ReplicatedStorage").Package.Events
+
+local SelectedQuest, SelectedMob
+
+local questDataOutsideID = {
+    {range = {0, 200000}, options = {"Klirin", "Kid Nohag"}},
+    {range = {200001, 850000}, options = {"Mapa", "Radish"}},
+    {range = {850001, 4500000}, options = {"Super Vegetable", "Chilly"}},
+    {range = {4500001, 5000000}, options = {"Perfect Atom", "SSJ2 Wukong"}},
+    {range = {5000001, 25000000}, options = {"SSJB Wukong", "Kai-fist Master"}},
+    {range = {25000001, 50000000}, options = {"SSJB Wukong", "Broccoli"}},
+    {range = {50000001, math.huge}, options = {"SSJG Kakata", "Broccoli"}}
+}
+local questDataInsideID = {
+    {range = {100000000, 300000000}, options = {"Vegetable (GoD in-training)", "Wukong (Omen)"}},
+    {range = {300000000, 900000000}, options = {"Vills (50%)", "Vis (20%)"}},
+    {range = {900000000, 1500000000}, options = {"Vis (20%)", "Vegetable (LBSSJ4)"}},
+    {range = {1500000000, 2500000000}, options = {"Wukong (LBSSJ4)", "Vegetable (LBSSJ4)"}},
+    {range = {2500000000, math.huge}, options = {"Vekuta (SSJBUI)", "Wukong Rose"}}
+}
+
+local questData = game.PlaceId ~= 5151400895 and questDataOutsideID or questDataInsideID
+
+task.spawn(function()
+    while true do
+        pcall(function()
+            local lowestStat = data.Defense.Value
+            for _, quest in pairs(questData) do
+                local minRange, maxRange = quest.range[1], quest.range[2]
+                if lowestStat >= minRange and lowestStat < maxRange then
+                    for _, mob in pairs(quest.options) do
+                        local boss = game:GetService("Workspace").Living:FindFirstChild(mob)
+                        if boss and boss:FindFirstChild("Humanoid") and boss.Humanoid.Health > 0 then
+                            SelectedQuest, SelectedMob = mob, mob
+                            break
+                        end
+                    end
+                    break
+                end
+            end
+
+            if data.Quest.Value == "" then
+                local npc = game:GetService("Workspace").Others.NPCs:FindFirstChild(SelectedQuest)
+                if npc and npc:FindFirstChild("HumanoidRootPart") then
+                    player.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame
+                    events.Qaction:InvokeServer(npc)
+                end
+            end
+
+            local boss = game:GetService("Workspace").Living:FindFirstChild(SelectedMob)
+            if boss and boss:FindFirstChild("Humanoid") and boss.Humanoid.Health <= 0 then
+                if data.Quest.Value == "" then
+                    local npc = game:GetService("Workspace").Others.NPCs:FindFirstChild(SelectedQuest)
+                    if npc and npc:FindFirstChild("HumanoidRootPart") then
+                        player.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame
+                        events.Qaction:InvokeServer(npc)
+                    end
+                end
+            end
+        end)
+        wait()
+    end
+end)
+
+--Fin del bucle
+end)    
+    wait(.5)
+end)
+
+verJugadores.MouseButton1Click:Connect(function()
+    local isAllowed = table.find(allowedPlayers, lplr.Name:lower()) ~= nil
+    if isAllowed then
+    -- Aki va el lector de Stats 
+    
+    else
+        verificationLabel.Text = "Acceso No Permitido"
+    end
+end)
+
+
+
+
+
